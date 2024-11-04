@@ -18,7 +18,7 @@ _**function**_ **d_A_z1z2** _**(z1, z2)**_: Returns the between sources at redsh
     <br /><br />**Returns:**    
     <br />Sersic model _(2d ndarray)_
 
-_**class**_ **PIEMD** _**(grid_x, grid_y, center_x, center_y, eps, phi, sigma_v, r_core, D_l, D_s, D_ls, pixel_in_DD=** 0.04/3600 **, pixels_in_x=** 1 **, pixels_in_y=** 1 **)**_: 
+<br />_**class**_ **PIEMD** _**(grid_x, grid_y, center_x, center_y, eps, phi, sigma_v, r_core, D_l, D_s, D_ls, pixel_in_DD=** 0.04/3600 **, pixels_in_x=** 1 **, pixels_in_y=** 1 **)**_: 
 A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In the following, FOV = Field Of View, that is, the galaxy cluster image that you try to fit this model to. If you are not using the model for fitting, you can stay with the defaults.
     <br /><br />**Args:**
     <br />**grid_x** _(int or 1d/2d ndarray)_: the x coordiante in pixels to calculate the model on, in pixels.
@@ -52,7 +52,7 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In 
 **method**_ **.angle()**: Returns the shear's inclination angle: 0.5 * arctan2(gamma_2, gamma_1)
 
 
- _**class**_ **light_sources** _**(x, y, a, b, phi, cluster_image, seg_map, PSF)**_: A class for the catalog of a galaxy cluster.
+<br /> _**class**_ **light_sources** _**(x, y, a, b, phi, cluster_image, seg_map, PSF)**_: A class for the catalog of a galaxy cluster.
     <br /><br />**Args:**
     <br />**x** _(1d ndarray)_: the x coordinates of the catalog galaxies, in pixels.
     <br />**y** _(1d ndarray)_: the y coordinates of the catalog galaxies, in pixels.
@@ -116,7 +116,7 @@ _**method**_ **.convergence_map** _**(self, axis_1, axis_2, shear1, shear2, jaco
         <br /><br />**Returns:**
         <br />**kappa** _(2d ndarray)_: the convergence grid.
 
-_**function**_ **mass** _**(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, divy, pixel_in_DD=** 0.04/3600 **)**_: A function that estimates the mass of the galaxy cluster, based on its convergence map
+<br />_**function**_ **mass** _**(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, divy, pixel_in_DD=** 0.04/3600 **)**_: A function that estimates the mass of the galaxy cluster, based on its convergence map
     <br /><br />**Args:**
     <br />**convergence** _(2d ndarray)_: the convergence map.
     <br />**mask** _(tuple of ndarrays, ndarray or int)_: the array elements you wish to sum over.
