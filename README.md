@@ -99,7 +99,7 @@ _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy)**_: A method that ca
         <br />**y_axis_cells** _(1d ndarray)_: shear grid's y axis.
 
 _**method**_ **.convergence_map** _**(self, axis_1, axis_2, shear1, shear2, jacobian, divx, divy)**_: A method that computes the convergence over the same grid that the shear was calculate on.
-        <br /><br />Agrs:
+        <br /><br />**Args**:
         <br />**axis_1** _(1d ndarray)_: shear grid's x axis.
         <br />**axis_2** _(1d ndarray)_: shear grid's y axis.
         <br />**shear1** _(2d ndarray)_: 1st shear component grid.
