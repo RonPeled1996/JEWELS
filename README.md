@@ -41,15 +41,15 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In 
 
 <br />_**method**_ **.PIEMD_second_derivatives()**: Returns the second derivatives psi_xx, psi_yy, psi_xy. Their shape is the same as the shape of grid_x and grid_y.
 
-<br />_**method**_ **.kappa()**: Returns the convergence: 0.5 * (psi_xx + psi_yy)  
+**method**_ **.kappa()**: Returns the convergence: 0.5 * (psi_xx + psi_yy)  
 
-<br />_**method**_ **.gamma_1()**: Returns the shear's 1st component: 0.5 * (psi_xx - psi_yy)  
+**method**_ **.gamma_1()**: Returns the shear's 1st component: 0.5 * (psi_xx - psi_yy)  
 
-<br />_**method**_ **.gamma_2()**: Returns the shear's 2nd component: psi_xy 
+**method**_ **.gamma_2()**: Returns the shear's 2nd component: psi_xy 
 
-<br />_**method**_ **.gamma()**: Returns the shear's magnitude: sqrt(gamma_1^2 + gamma_2^2)  
+**method**_ **.gamma()**: Returns the shear's magnitude: sqrt(gamma_1^2 + gamma_2^2)  
 
-<br />_**method**_ **.angle()**: Returns the shear's inclination angle: 0.5 * arctan2(gamma_2, gamma_1)
+**method**_ **.angle()**: Returns the shear's inclination angle: 0.5 * arctan2(gamma_2, gamma_1)
 
 
  _**class**_ **light_sources** _**(x, y, a, b, phi, cluster_image, seg_map, PSF)**_: A class for the catalog of a galaxy cluster.
