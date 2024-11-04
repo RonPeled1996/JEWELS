@@ -9,7 +9,7 @@ _**function**_ **d_A_z** _**(z)**_: Returns the distance to a source at redshift
 _**function**_ **d_A_z1z2** _**(z1, z2)**_: Returns the between sources at redshifts z1, z2.
 
  _**function**_ **Sersic_2D** _**(grid_x, grid_y, params)**_: A galaxy model (Sersic profile, from https://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sersic2D.html)
-    <br /><br /><ins>Args:<ins />
+    <br /><br /><ins>Args:
     <br />**eps** _(int or float; range [0, 1])_: eps = 1 - b/a, where a and b are the semi-major and semi-minor axes of the Sersic ellipse, respectively.
     <br />**a** _(int or float; a > 0)_: the semi-major axis of the Sersic ellipse, in pixels.
     <br />**phi** _(int or float; range [-pi/2, pi/2])_: the inclination angle of the PIEMD ellipse, in radians.
