@@ -9,18 +9,18 @@ _**function**_ **d_A_z** _**(z)**_: Returns the distance to a source at redshift
 _**function**_ **d_A_z1z2** _**(z1, z2)**_: Returns the between sources at redshifts z1, z2.
 
  _**function**_ **Sersic_2D** _**(grid_x, grid_y, params)**_: A galaxy model (Sersic profile, from https://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sersic2D.html)
-    <br /><br /><ins>Args:<\ins>
+    <br /><br /><ins>Args:<ins />
     <br />**eps** _(int or float; range [0, 1])_: eps = 1 - b/a, where a and b are the semi-major and semi-minor axes of the Sersic ellipse, respectively.
     <br />**a** _(int or float; a > 0)_: the semi-major axis of the Sersic ellipse, in pixels.
     <br />**phi** _(int or float; range [-pi/2, pi/2])_: the inclination angle of the PIEMD ellipse, in radians.
     <br />**sers_ind** _(int or float; range [0.06, 10])_: the Sersic index.
     <br />**x0, y0** _(int or float)_: the central coordinates of the Sersic ellipse, in pixels.
-    <br /><br /><ins>Returns:<\ins>    
+    <br /><br /><ins>Returns:<ins />    
     <br />Sersic model _(2d ndarray)_
 
 _**class**_ **PIEMD** _**(grid_x, grid_y, center_x, center_y, eps, phi, sigma_v, r_core, D_l, D_s, D_ls, pixel_in_DD=** 0.04/3600 **, pixels_in_x=** 1 **, pixels_in_y=** 1 **)**_: 
 A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In the following, FOV = Field Of View, that is, the galaxy cluster image that you try to fit this model to. If you are not using the model for fitting, you can stay with the defaults.
-    <br /><br /><ins>Args:<\ins>
+    <br /><br /><ins>Args:<ins />
     <br />**grid_x** _(int or 1d/2d ndarray)_: the x coordiante in pixels to calculate the model on, in pixels.
     <br />**grid_y** _(int or 1d/2d ndarray)_: the y coordiante in pixels to calculate the model on, in pixels.
     <br />**center_x** _(int or float)_: the x coordinate of the PIEMD ellipse center, in pixels.
@@ -47,7 +47,7 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In 
 <br />_**method**_ **.angle()**: Returns the shear's inclination angle: 0.5 * arctan2(gamma_2, gamma_1)
 
  _**class**_ **light_sources** _**(x, y, a, b, phi, cluster_image, seg_map, PSF)**_: A class for the catalog of a galaxy cluster.
-    <br /><br /><ins>Args:<\ins>
+    <br /><br /><ins>Args:<ins />
     <br />**x** _(1d ndarray)_: the x coordinates of the catalog galaxies, in pixels.
     <br />**y** _(1d ndarray)_: the y coordinates of the catalog galaxies, in pixels.
     <br />**a** _(1d ndarray)_: the semi-major axis of the catalog galaxies, in pixels.
@@ -60,26 +60,26 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In 
     <br /><br />**PSF** _(2d ndarray)_: the aperture's PSF. Must be normlized such that np.allclose(np.sum(PSF), 1, 1e-1, 1e-1).
 
 _**method**_ **.size_filter** _**(self, size=** 20 **)**_: A method that filters the galaxies according to np.size > size.
-        <br /><br /><ins>Args:<\ins>
+        <br /><br /><ins>Args:<ins />
         <br />**size** _(int, size > 0)_: the array size bar below which galaxies are filtered. Default is 20.
-        <br /><br /><ins>Returns:<\ins>
+        <br /><br /><ins>Returns:<ins />
         <br />**ind_size** _(1d ndarray)_: the indexes of the galaxies with np.size > size.
 
 _**method**_ **.deconvolver** _**(self, ID_ind, nsteps=** 10000 **, MCMC_progress=** False **)**_: A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
         Can be parallelized (see example notebook).
-        <br /><br /><ins>Args:<\ins>
+        <br /><br /><ins>Args:<ins />
         <br />**ID_ind** _(int)_: the galaxy's index to be deconvolved.
         <br />**nsteps** _(int)_: the number of steps for the MCMC walkers to take. Default is 10000.
         <br />**MCMC_progress** _(bool)_: whether to show the progress bar or not. Default is False.
         <br /><br />*Below, ellipticity is (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
-        <br /><br /><ins>Returns:<\ins>
+        <br /><br /><ins>Returns:<ins />
         <br />**ID_ind** _(float)_: the deconvolved galaxy's index.
         <br />**e1** _(float)_: the deconvolved galaxy's first ellipticity component.
         <br />**e2** _(float)_: the deconvolved galaxy's second ellipticity component.
         <br />**ind_gal** _(float)_: the deconvolved galaxy's segmantation map index (as it might not be the same as ID_ind).
 
 _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy)**_: A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
-        <br /><br /><ins>Args:<\ins>
+        <br /><br /><ins>Args:<ins />
         <br />**e1** _(1d ndarray)_: 1st ellipticity component of all galaxies to be considered.
         <br />**e2** _(1d ndarray)_: 2st ellipticity component of all galaxies to be considered.
         <br />**x** _(1d ndarray)_: x coordinate of all galaxies to be considered.
@@ -87,7 +87,7 @@ _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy)**_: A method that ca
         <br />**divx** _(int, divx > 0)_: the number of x axis divisions.
         <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
         <br /><br />*divx and divy set the grid over which the averaging and calculation of the shear takes place.
-        <br /><br /><ins>Returns:<\ins>
+        <br /><br /><ins>Returns:<ins />
         <br />**g1** _(2d ndarray)_: 1st shear component grid.
         <br />**g1_std** _(2d ndarray)_: 1st shear component std grid.
         <br />**g2** _(2d ndarray)_: 2st shear component grid.
@@ -107,11 +107,11 @@ _**method**_ **.convergence_map** _**(self, axis_1, axis_2, shear1, shear2, jaco
         <br />**jacobian** _(float)_: the jacobian transforming from the FOV resolution to the shear grid resolution.
         <br />**divx** _(int, divx > 0)_: the number of x axis divisions.
         <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
-        <br /><br /><ins>Returns:<\ins>
+        <br /><br /><ins>Returns:<ins />
         <br />**kappa** _(2d ndarray)_: the convergence grid.
 
 _**function**_ **mass** _**(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, divy, pixel_in_DD=** 0.04/3600 **)**_: A function that estimates the mass of the galaxy cluster, based on its convergence map
-    <br /><br /><ins>Args:<\ins>
+    <br /><br /><ins>Args:<ins />
     <br />**convergence** _(2d ndarray)_: the convergence map.
     <br />**mask** _(tuple of ndarrays, ndarray or int)_: the array elements you wish to sum over.
     <br />**D_l** _(float; D_l > 0)_: the distance from the observer to the lens, in Mpc.
@@ -125,6 +125,6 @@ _**function**_ **mass** _**(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_m
     <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
     <br />**pixel_in_DD** _(int or float; pixel_in_DD > 0)_: the FOV resolution, i.e., how many decimal degrees does one pixel represent. The defualt is 0.04/3600, 
                                                  that is, 1 pixel = 0.04".    
-    <br /><br /><ins>Returns:<\ins>
+    <br /><br /><ins>Returns:<ins />
     <br />**mass** _(float)_: the mass estimate of the cluster.
     <br />**mass_uns** _(float)_: the uncertainty of the above value, taken to be 15% of it.
