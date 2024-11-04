@@ -9,14 +9,14 @@ _**function**_ **d_A_z** _**(z)**_: Returns the distance to a source at redshift
 _**function**_ **d_A_z1z2** _**(z1, z2)**_: Returns the between sources at redshifts z1, z2.
 
  _**function**_ **Sersic_2D** _**(grid_x, grid_y, params)**_: A galaxy model (Sersic profile, from https://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sersic2D.html)
-    \\Args:
-    **eps** _(int or float; range [0, 1])_: eps = 1 - b/a, where a and b are the semi-major and semi-minor axes of the Sersic ellipse, respectively.
-    **a** _(int or float; a > 0)_: the semi-major axis of the Sersic ellipse, in pixels.
-    **phi** _(int or float; range [-pi/2, pi/2])_: the inclination angle of the PIEMD ellipse, in radians.
-    **sers_ind** _(int or float; range [0.06, 10])_: the Sersic index.
-    **x0, y0** _(int or float)_: the central coordinates of the Sersic ellipse, in pixels.
-    Returns:    
-    Sersic model _(2d ndarray)_
+    <\br>Args:
+    <\br>**eps** _(int or float; range [0, 1])_: eps = 1 - b/a, where a and b are the semi-major and semi-minor axes of the Sersic ellipse, respectively.
+    <\br>**a** _(int or float; a > 0)_: the semi-major axis of the Sersic ellipse, in pixels.
+    <\br>**phi** _(int or float; range [-pi/2, pi/2])_: the inclination angle of the PIEMD ellipse, in radians.
+    <\br>**sers_ind** _(int or float; range [0.06, 10])_: the Sersic index.
+    <\br>**x0, y0** _(int or float)_: the central coordinates of the Sersic ellipse, in pixels.
+    <\br>Returns:    
+    <\br>Sersic model _(2d ndarray)_
 
 _**class**_ **PIEMD** _**(grid_x, grid_y, center_x, center_y, eps, phi, sigma_v, r_core, D_l, D_s, D_ls, pixel_in_DD=** 0.04/3600 **, pixels_in_x=** 1 **, pixels_in_y=** 1 **)**_: 
 A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7). In the following, FOV = Field Of View, that is, the galaxy cluster image that you try to fit this model to. If you are not using the model for fitting, you can stay with the defaults.
