@@ -1,7 +1,7 @@
 # WLensingtool
 A Weak Lensing mass mapping pipeline of galaxy cluster images.
 
-It has been written using the modules: Numpy, Scipy, emcee, astropy and photutils.
+It was written by using the modules: Numpy, Scipy, emcee, astropy and photutils.
 
 ## Documentation:
 * _**function**_ **d_A_z** _**(z)**_: Returns the distance to a source at redshift z in Mpc.
