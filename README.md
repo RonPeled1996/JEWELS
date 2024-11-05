@@ -1,5 +1,5 @@
 # WLensingtool
-A Weak Lensing mass mapping pipeline of galaxy cluster images. This pipeline is capable of detecting the deformation effect a galaxy cluster has on background light sources images, and deduce the projected mass distribution of the galaxy cluster. It was written by using the modules: Numpy, Scipy, emcee, astropy and photutils.
+A Weak Lensing mass mapping pipeline of galaxy cluster images. This pipeline is capable of detecting and measuring the deformation effect a galaxy cluster has on images of background light sources, and deduce from that the projected mass distribution of the galaxy cluster. It was written by using the modules: Numpy, Scipy, emcee, astropy and photutils.
 
 ## Documentation:
 * _**function**_ **d_A_z** _**(z)**_: returns the distance to a source at redshift z in Mpc.
