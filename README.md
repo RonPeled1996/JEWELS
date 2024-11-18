@@ -1,6 +1,6 @@
 # WLensingtool
 A weak-lensing mass mapping pipeline designed for analyzing galaxy cluster images. This pipeline detects and quantifies the deformation effect a galaxy cluster imposes on background light
-sources, enabling the inference of the cluster’s projected mass distribution. It was written by using the modules: Numpy, Scipy, emcee, astropy and photutils.
+sources, enabling the inference of the cluster’s projected mass distribution. It was written by using the modules: Numpy, Scipy, emcee, astropy and photutils. The pipeline assumes standard cosmology throughout.
 
 ## Documentation:
 * _**function**_ **d_A_z** _**(z)**_: returns the distance to a source at redshift z in Mpc.
@@ -19,7 +19,7 @@ Sersic model _(2d ndarray)_
 
 * _**class**_ **PIEMD** _**(grid_x, grid_y, center_x, center_y, eps, phi, sigma_v, r_core, D_l, D_s, D_ls, pixel_in_DD=** 0.04/3600 **, pixels_in_x=** 1 **, pixels_in_y=** 1 **)**_: 
 A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7).
-<br />*In the following, FOV = Field Of View, that is, the galaxy cluster image that you try to fit this model to. If you are not using the model for fitting, you can stay with the defaults.
+<br /><br />*In the following, FOV = Field Of View, that is, the galaxy cluster image that you try to fit this model to. If you are not using the model for fitting, you can stay with the defaults.
 
     - **Args:**
 <br />**grid_x** _(int or 1d/2d ndarray)_: the x coordiante in pixels to calculate the model on, in pixels.
@@ -73,12 +73,13 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7).
 <br />**ind_size** _(1d ndarray)_: the indexes of the galaxies with np.size > size.
 
 * _**method**_ **.deconvolver** _**(self, ID_ind, nsteps=** 10000 **, MCMC_progress=** False **)**_: A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
-Can be parallelized (see example notebook).
+Can be parallelized (see example notebook). It assumes a Sersic profile for the intrinsic galaxy, and accounts for the model bias.
     - **Args:**
 <br />**ID_ind** _(int)_: the galaxy's index to be deconvolved.
 <br />**nsteps** _(int)_: the number of steps for the MCMC walkers to take. Default is 10000.
 <br />**MCMC_progress** _(bool)_: whether to show the progress bar or not. Default is False.
-<br />*Below, ellipticity is (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
+<br /><br />*Below, ellipticity is (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
+
     - **returns:**
 <br />**ID_ind** _(float)_: the deconvolved galaxy's index.
 <br />**e1** _(float)_: the deconvolved galaxy's first ellipticity component.
@@ -93,7 +94,8 @@ Can be parallelized (see example notebook).
 <br />**y** _(1d ndarray)_: y coordinate of all galaxies to be considered.
 <br />**divx** _(int, divx > 0)_: the number of x axis divisions.
 <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
-<br />*divx and divy set the grid over which the averaging and calculation of the shear takes place.
+<br /><br />*divx and divy set the grid over which the averaging and calculation of the shear takes place.
+
     - **returns:**
 <br />**g1** _(2d ndarray)_: 1st shear component grid.
 <br />**g1_std** _(2d ndarray)_: 1st shear component std grid.
@@ -116,6 +118,8 @@ Can be parallelized (see example notebook).
 <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
     - **returns:**
 <br />**kappa** _(2d ndarray)_: the convergence grid.
+
+* _**attribute**_ **.convergence_uncertainty**: The uncertainty of the convergence map.
 
 * _**function**_ **mass** _**(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, divy, pixel_in_DD=** 0.04/3600 **)**_: A function that estimates the mass of the galaxy cluster, based on its convergence map
     - **Args:**
