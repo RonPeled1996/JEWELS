@@ -7,6 +7,7 @@ from photutils.background import Background2D, SExtractorBackground
 from scipy.signal import fftconvolve
 
 
+## Standard cosmology:
 H0 = 70     # Hubble parameter; (km/s) / Mpc
 Om0 = 0.3   # omega matter
 Ode0 = 0.7  # omega lambda
@@ -431,7 +432,7 @@ class light_sources:
         
         
         """A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
-        Can be parallelized.
+        Can be parallelized. It assumes a Sersic profile for the intrinsic galaxy, and accounts for the model bias.
         
         Args:
         ID_ind (int): the galaxy's index to be deconvolved.
@@ -771,6 +772,9 @@ class light_sources:
         
         
         return - kappa / np.pi
+    
+
+convergence_uncertainty = 0.1
     
     
 def mass(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, divy, pixel_in_DD=0.04/3600):
