@@ -37,31 +37,34 @@ def Sersic_2D(grid_x, grid_y, params):
     Sersic model (2d ndarray)
     
     """
+
     
+    eps, a, phi, sers_ind, x0, y0 = params
+
     
     if not isinstance(eps, (float, int)):
         raise TypeError("eps must be a float or an integer.")
     
-    if not eps >= 0 and eps <= 1:
-        raise ValueError("eps must be within the range [0, 1].")
+    # if ((eps < 0) or (eps > 1)):
+    #     raise ValueError("eps must be within the range [0, 1].")
        
     if not isinstance(a, (float, int)):
         raise TypeError("a must be a float or an integer.")
     
-    if not a > 0:
-        raise ValueError("a must be positive.")
+    # if not a > 0:
+    #     raise ValueError("a must be positive.")
 
     if not isinstance(phi, (float, int)):
         raise TypeError("The inclination angle must be a float or an integer.")
         
-    if phi >= - np.pi / 2 and phi <= np.pi / 2:
-        raise ValueError("The inclination angle must be within the range [-pi/2, pi/2].")
+    # if ((phi < - np.pi / 2) or (phi > np.pi / 2)):
+    #     raise ValueError("The inclination angle must be within the range [-pi/2, pi/2].")
         
     if not isinstance(sers_ind, (float, int)):
         raise TypeError("The Sersic index must be a float or an integer.")
         
-    if sers_ind >= 0.06 and sers_ind <= 10:
-        raise ValueError("The Sersic index must be within the range [0.06, 10].")
+    # if ((sers_ind < 0.06) or (sers_ind > 10)):
+    #     raise ValueError("The Sersic index must be within the range [0.06, 10].")
         
     if not isinstance(x0, (float, int)):
         raise TypeError("x0 must be a float or an integer.")
@@ -69,9 +72,7 @@ def Sersic_2D(grid_x, grid_y, params):
     if not isinstance(y0, (float, int)):
         raise TypeError("y0 must be a float or an integer.")
         
-    
-    eps, a, phi, sers_ind, x0, y0 = params
-    
+        
     A = (grid_x - x0) * np.cos(phi) + (grid_y - y0) * np.sin(phi)
     B = -(grid_x - x0) * np.sin(phi) + (grid_y - y0) * np.cos(phi)
     r = np.sqrt(A**2 + (B/(1 - eps))**2)
@@ -473,8 +474,8 @@ class light_sources:
 
         galaxy_map = self.seg_map[min_y:max_y, min_x:max_x]
         galaxy = self.cluster_image[min_y:max_y, min_x:max_x]
-
-
+                
+        
         ## add bkg:     
         sigma_clip = SigmaClip(sigma=5., maxiters=15)
 
@@ -868,8 +869,8 @@ def mass(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, di
     y_div = (y_max - y_min) / divy
     jacobian = D_l**2 * (pixel_in_DD**2 * x_div * y_div) * (np.pi / 180)**2  # Mpc^2
     
-    if np.min(convergence) < 0:
-        mass = sigma_c * np.sum(convergence[mask] + np.abs(np.min(convergence))) * jacobian  # M_sun
+    if np.min(convergence[np.where(~ np.isnan(convergence))]) < 0:
+        mass = sigma_c * np.sum(convergence[mask] + np.abs(np.min(convergence[np.where(~ np.isnan(convergence))]))) * jacobian  # M_sun
     else:
         mass = sigma_c * np.sum(convergence[mask]) * jacobian  # M_sun
         
