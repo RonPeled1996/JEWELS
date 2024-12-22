@@ -78,23 +78,23 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**ID_ind** _(int)_: the galaxy's index to be deconvolved.
 <br />**nsteps** _(int)_: the number of steps for the MCMC walkers to take. Default is 10000.
 <br />**MCMC_progress** _(bool)_: whether to show the progress bar or not. Default is False.
-<br /><br />*Below, ellipticity is (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
+<br /><br />*Below, ellipticity is e = (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
 
     - **returns:**
 <br />**ID_ind** _(float)_: the deconvolved galaxy's index.
-<br />**e1** _(float)_: the deconvolved galaxy's first ellipticity component.
-<br />**e2** _(float)_: the deconvolved galaxy's second ellipticity component.
+<br />**e1** _(float)_: the deconvolved galaxy's first ellipticity component, that is, e = cos(2phi), where phi is the inclination angle.
+<br />**e2** _(float)_: the deconvolved galaxy's second ellipticity component, that is, e = sin(2phi), where phi is the inclination angle.
 <br />**ind_gal** _(float)_: the deconvolved galaxy's segmantation map index (as it might not be the same as ID_ind).
 
 * _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy)**_: A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
     - **Args:**
-<br />**e1** _(1d ndarray)_: 1st ellipticity component of all galaxies to be considered.
-<br />**e2** _(1d ndarray)_: 2st ellipticity component of all galaxies to be considered.
+<br />**e1** _(1d ndarray)_: 1st ellipticity component of all galaxies to be considered (see 'deconvolver').
+<br />**e2** _(1d ndarray)_: 2st ellipticity component of all galaxies to be considered (see 'deconvolver').
 <br />**x** _(1d ndarray)_: x coordinate of all galaxies to be considered.
 <br />**y** _(1d ndarray)_: y coordinate of all galaxies to be considered.
 <br />**divx** _(int, divx > 0)_: the number of x axis divisions.
 <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
-<br /><br />*divx and divy set the grid over which the averaging and calculation of the shear takes place.
+<br /><br />*divx and divy set the grid over which the averaging and calculation of the shear takes place. Only cells with at least 8 sources are considered, in order to get reliable averages.
 
     - **returns:**
 <br />**g1** _(2d ndarray)_: 1st shear component grid.
@@ -106,13 +106,14 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**jacobian_xy** _(float)_: the jacobian transforming from the FOV resolution to the shear grid resolution.
 <br />**x_axis_cells** _(1d ndarray)_: shear grid's x axis.
 <br />**y_axis_cells** _(1d ndarray)_: shear grid's y axis.
+<br /><br />*shear is defined similarly to ellipticity (see 'deconvolver').
 
 * _**method**_ **.convergence_map** _**(self, axis_1, axis_2, shear1, shear2, jacobian, divx, divy)**_: A method that computes the convergence over the same grid that the shear was calculate on.
     - **Args**:
 <br />**axis_1** _(1d ndarray)_: shear grid's x axis.
 <br />**axis_2** _(1d ndarray)_: shear grid's y axis.
-<br />**shear1** _(2d ndarray)_: 1st shear component grid.
-<br />**shear2** _(2d ndarray)_: 2st shear component grid.
+<br />**shear1** _(2d ndarray)_: 1st shear component grid (see 'shear').
+<br />**shear2** _(2d ndarray)_: 2st shear component grid (see 'shear').
 <br />**jacobian** _(float)_: the jacobian transforming from the FOV resolution to the shear grid resolution.
 <br />**divx** _(int, divx > 0)_: the number of x axis divisions.
 <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
