@@ -440,12 +440,12 @@ class light_sources:
         nsteps (int): the number of steps for the MCMC walkers to take. Default is 10000.
         MCMC_progress (bool): whether to show the progress bar or not. Default is False.
         
-        *Below, ellipticity is (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
+        *Below, ellipticity is e = (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
         
         Returns:
         ID_ind (float): the deconvolved galaxy's index.
-        e1 (float): the deconvolved galaxy's first ellipticity component.
-        e2 (float): the deconvolved galaxy's second ellipticity component.
+        e1 (float): the deconvolved galaxy's first ellipticity component, that is, e = cos(2*phi), where phi is the inclination angle.
+        e2 (float): the deconvolved galaxy's second ellipticity component, that is, e = sin(2*phi), where phi is the inclination angle.
         ind_gal (float): the deconvolved galaxy's segmantation map index (as it might not be the same as ID_ind).
         
         """
@@ -585,14 +585,14 @@ class light_sources:
         """A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
         
         Args:
-        e1 (1d ndarray): 1st ellipticity component of all galaxies to be considered.
-        e2 (1d ndarray): 2st ellipticity component of all galaxies to be considered.
+        e1 (1d ndarray): 1st ellipticity component of all galaxies to be considered (see 'deconvolver').
+        e2 (1d ndarray): 2st ellipticity component of all galaxies to be considered (see 'deconvolver').
         x (1d ndarray): x coordinate of all galaxies to be considered.
         y (1d ndarray): y coordinate of all galaxies to be considered.
         divx (int, divx > 0): the number of x axis divisions.
         divy (int, divy > 0): the number of y axis divisions.
         
-        *divx and divy set the grid over which the averaging and calculation of the shear takes place.
+        *divx and divy set the grid over which the averaging and calculation of the shear takes place. Only cells with at least 8 sources are considered, in order to get reliable averages.
         
         Returns:
         g1 (2d ndarray): 1st shear component grid.
@@ -604,6 +604,8 @@ class light_sources:
         jacobian_xy (float): the jacobian transforming from the FOV resolution to the shear grid resolution.
         x_axis_cells (1d ndarray): shear grid's x axis.
         y_axis_cells (1d ndarray): shear grid's y axis.
+
+        *shear is defined similarly to ellipticity (see 'deconvolver').
                 
         """
         
@@ -705,8 +707,8 @@ class light_sources:
         Agrs:
         axis_1 (1d ndarray): shear grid's x axis.
         axis_2 (1d ndarray): shear grid's y axis.
-        shear1 (2d ndarray): 1st shear component grid.
-        shear2 (2d ndarray): 2st shear component grid.
+        shear1 (2d ndarray): 1st shear component grid (see 'shear').
+        shear2 (2d ndarray): 2st shear component grid (see 'shear').
         jacobian (float): the jacobian transforming from the FOV resolution to the shear grid resolution.
         divx (int, divx > 0): the number of x axis divisions.
         divy (int, divy > 0): the number of y axis divisions.
