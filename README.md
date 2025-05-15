@@ -53,7 +53,7 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7).
 * _**method**_ **.angle()**: returns the shear's inclination angle: 0.5 * arctan2(gamma_2, gamma_1)
 
 
-* _**class**_ **light_sources** _**(x, y, a, b, phi, cluster_image, seg_map, PSF)**_: A class for the catalog of a galaxy cluster.
+* _**class**_ **light_sources** _**(x, y, a, b, phi, cluster_image, seg_map)**_: A class for the catalog of a galaxy cluster.
     - **Args:**
 <br />**x** _(1d ndarray)_: the x coordinates of the catalog galaxies, in pixels.
 <br />**y** _(1d ndarray)_: the y coordinates of the catalog galaxies, in pixels.
@@ -64,7 +64,6 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7).
 <br />**cluster_image** _(2d ndarray)_: the FOV image.
 <br />**seg_map** _(2d ndarray)_: the segmantation map.
 <br />*cluster_image.shape == seg_map.shape
-<br />**PSF** _(2d ndarray)_: the aperture's PSF. Must be normlized such that np.allclose(np.sum(PSF), 1, 1e-1, 1e-1).
 
 * _**method**_ **.size_filter** _**(self, size=** 20 **)**_: A method that filters the galaxies according to np.size > size.
     - **Args:**
@@ -72,10 +71,11 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7).
     - **returns:**
 <br />**ind_size** _(1d ndarray)_: the indexes of the galaxies with np.size > size.
 
-* _**method**_ **.deconvolver** _**(self, ID_ind, nsteps=** 10000 **, MCMC_progress=** False **)**_: A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
+* _**method**_ **.deconvolver** _**(self, ID_ind, PSF, nsteps=** 10000 **, MCMC_progress=** False **)**_: A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
 Can be parallelized (see example notebook). It assumes a Sersic profile for the intrinsic galaxy, and accounts for the model bias.
     - **Args:**
 <br />**ID_ind** _(int)_: the galaxy's index to be deconvolved.
+<br />**PSF** _(2d ndarray)_: the aperture's PSF. Must be normlized such that np.allclose(np.sum(PSF), 1, 1e-1, 1e-1).
 <br />**nsteps** _(int)_: the number of steps for the MCMC walkers to take. Default is 10000.
 <br />**MCMC_progress** _(bool)_: whether to show the progress bar or not. Default is False.
 <br /><br />*Below, ellipticity is e = (a - b)/(a + b) that is need for WL; not to be confused with eps = 1 - b/a.
@@ -86,7 +86,7 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**e2** _(float)_: the deconvolved galaxy's second ellipticity component, that is, e = sin(2phi), where phi is the inclination angle.
 <br />**ind_gal** _(float)_: the deconvolved galaxy's segmantation map index (as it might not be the same as ID_ind).
 
-* _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy)**_: A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
+* _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy, SN)**_: A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
     - **Args:**
 <br />**e1** _(1d ndarray)_: 1st ellipticity component of all galaxies to be considered (see 'deconvolver').
 <br />**e2** _(1d ndarray)_: 2st ellipticity component of all galaxies to be considered (see 'deconvolver').
@@ -94,6 +94,7 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**y** _(1d ndarray)_: y coordinate of all galaxies to be considered.
 <br />**divx** _(int, divx > 0)_: the number of x axis divisions.
 <br />**divy** _(int, divy > 0)_: the number of y axis divisions.
+<br />**SN** _(1d ndarray)_: the flux S/N values of all galaxies to be considered.
 <br /><br />*divx and divy set the grid over which the averaging and calculation of the shear takes place. Only cells with at least 8 sources are considered, in order to get reliable averages.
 
     - **returns:**
