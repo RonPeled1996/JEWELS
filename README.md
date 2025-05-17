@@ -1,4 +1,4 @@
-# WLensingtool
+# JEWELS: JWST Weak-Lensing simple analysis pipeline
 A weak-lensing mass mapping pipeline designed for analyzing galaxy cluster images. This pipeline detects and quantifies the deformation effect a galaxy cluster imposes on background light
 sources, enabling the inference of the cluster’s projected mass distribution. It was written by using the modules: Numpy, Scipy, emcee, astropy and photutils. The pipeline assumes standard cosmology throughout.
 
