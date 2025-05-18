@@ -139,5 +139,6 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**pixel_in_DD** _(int or float; pixel_in_DD > 0)_: the FOV resolution, i.e., how many decimal degrees does one pixel represent. The defualt is 0.04/3600, 
                                              that is, 1 pixel = 0.04".    
     - **returns:**
-<br />**mass** _(float)_: the mass estimate of the cluster.
-<br />**mass_uns** _(float)_: the uncertainty of the above value, taken to be 15% of it.
+<br />**mass** _(float)_: the mass estimate of the cluster, in solar masses.
+<br />**mass_uns** _(float)_: the uncertainty of the above value, taken to be 15% of it, following Zitrin et al. (2015)*.
+<br /><br />*Adi Zitrin _et al_ 2015 _ApJ_ **801** 44. **DOI** 10.1088/0004-637X/801/1/44.
