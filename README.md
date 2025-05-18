@@ -65,13 +65,13 @@ A galaxy cluster parametric model (from "glafic (2022)" appendix B.6 & B.7).
 <br />**seg_map** _(2d ndarray)_: the segmantation map.
 <br />*cluster_image.shape == seg_map.shape
 
-* _**method**_ **.size_filter** _**(self, size=** 20 **)**_: A method that filters the galaxies according to np.size > size.
+* _**method**_ **.size_filter** _**(size=** 20 **)**_: A method that filters the galaxies according to np.size > size.
     - **Args:**
 <br />**size** _(int, size > 0)_: the array size bar below which galaxies are filtered. Default is 20.
     - **returns:**
 <br />**ind_size** _(1d ndarray)_: the indexes of the galaxies with np.size > size.
 
-* _**method**_ **.deconvolver** _**(self, ID_ind, PSF, nsteps=** 10000 **, MCMC_progress=** False **)**_: A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
+* _**method**_ **.deconvolver** _**(ID_ind, PSF, nsteps=** 10000 **, MCMC_progress=** False **)**_: A method that deconvolves each galaxy image from the aperture's PSF, using MCMC.
 Can be parallelized (see example notebook). It assumes a Sersic profile for the intrinsic galaxy, and accounts for the model bias.
     - **Args:**
 <br />**ID_ind** _(int)_: the galaxy's index to be deconvolved.
@@ -86,7 +86,7 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**e2** _(float)_: the deconvolved galaxy's second ellipticity component, that is, e = sin(2phi), where phi is the inclination angle.
 <br />**ind_gal** _(float)_: the deconvolved galaxy's segmantation map index (as it might not be the same as ID_ind).
 
-* _**method**_ **.shear** _**(self, e1, e2, x, y, divx, divy, SN)**_: A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
+* _**method**_ **.shear** _**(e1, e2, x, y, divx, divy, SN)**_: A method that calculates the shear over a grid overlaying the galaxy cluster's FOV.
     - **Args:**
 <br />**e1** _(1d ndarray)_: 1st ellipticity component of all galaxies to be considered (see 'deconvolver').
 <br />**e2** _(1d ndarray)_: 2st ellipticity component of all galaxies to be considered (see 'deconvolver').
@@ -109,7 +109,7 @@ Can be parallelized (see example notebook). It assumes a Sersic profile for the 
 <br />**y_axis_cells** _(1d ndarray)_: shear grid's y axis.
 <br /><br />*shear is defined similarly to ellipticity (see 'deconvolver').
 
-* _**method**_ **.convergence_map** _**(self, axis_1, axis_2, shear1, shear2, jacobian, divx, divy)**_: A method that computes the convergence over the same grid that the shear was calculate on.
+* _**method**_ **.convergence_map** _**(axis_1, axis_2, shear1, shear2, jacobian, divx, divy)**_: A method that computes the convergence over the same grid that the shear was calculate on.
     - **Args**:
 <br />**axis_1** _(1d ndarray)_: shear grid's x axis.
 <br />**axis_2** _(1d ndarray)_: shear grid's y axis.
