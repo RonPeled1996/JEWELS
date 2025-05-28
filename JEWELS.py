@@ -891,4 +891,4 @@ def mass(convergence, mask, D_l, D_s, D_ls, x_min, x_max, y_min, y_max, divx, di
     mass_uns = 0.15 * mass  # M_sun
     
     
-    return np.format_float_scientific(mass), np.format_float_scientific(mass_uns)
+    return mass, mass_uns
